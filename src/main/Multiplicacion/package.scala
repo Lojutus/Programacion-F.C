@@ -2,12 +2,30 @@ package main
 
 
 package object Multiplicacion {
-  def PeasantAlgorithm(x:Int, y:Int ): Int = {
-    x
+  def PeasantAlgorithm(a: Int, b: Int): Int = {
+    if (a == 0)
+      0
+    else if (a % 2 == 0)
+      PeasantAlgorithm((a / 2), b + b)
+    else
+      PeasantAlgorithm((a / 2), b + b) + b
   }
 
   def PeasantAlgorithmIt(x: Int, y: Int): Int = {
-    x
+
+    def ciclo(a: Int, b: Int, respuesta: Int): Int = {
+      if (a == 0) {
+        respuesta
+      } else if (a % 2 != 0) {
+
+        ciclo(a / 2, b + b, respuesta + b)
+      } else {
+
+        ciclo(a / 2, b +b , respuesta)
+      }
+    }
+
+    ciclo(x, y, 0)
   }
 
   def splitMultiply(a: Long, b: Long): Long = {

@@ -1,12 +1,22 @@
 import main.Multiplicacion.*
 
-
+PeasantAlgorithm(89023,10) // 890230
+PeasantAlgorithmIt(89023,10) // 890230
 splitMultiply(100,100)
 splitMultiply2(89023,10)
 fastMultiply(89023,10)
-
+PeasantAlgorithmIt(1000, 0) // 56
 
 //Casos de prueba hecho por la ai
+
+PeasantAlgorithm(100,100)
+PeasantAlgorithm(9999, 9999) //99980001
+PeasantAlgorithm(7, 8) // 56
+
+PeasantAlgorithmIt(100,100)
+PeasantAlgorithmIt(9999, 9999) //99980001
+PeasantAlgorithmIt(7, 8) // 56
+
 
 splitMultiply(100, 100) // 10000
 splitMultiply(9999, 9999) //99980001
