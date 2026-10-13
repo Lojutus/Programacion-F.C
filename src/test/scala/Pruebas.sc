@@ -1,52 +1,13 @@
-import main.Multiplicacion.*
+import main.Derivacion.*
 
+val deEquis = (x :Double) => x
+val cuadrado = (x :Double) => x*x
+val cubo = (x :Double) => x*x*x
+val cte = (x :Double) => x*x*x*x
+val quinta = (x :Double) => x*x*x*x*x
 
-PeasantAlgorithm(89023,10) // 890230
-PeasantAlgorithm(89023,100) // 8902300
-PeasantAlgorithm(8902,100) // 890200
-PeasantAlgorithm(890,100) // 89000
-PeasantAlgorithm(100,100) //10000
-
-
-PeasantAlgorithmIt(89023,10) // 890230
-PeasantAlgorithmIt(89023,100) // 8902300
-PeasantAlgorithmIt(8902,100) // 890200
-PeasantAlgorithmIt(890,100) // 89000
-PeasantAlgorithmIt(100,100) //10000
-
-splitMultiply(89023,10) // 890230
-splitMultiply(89023,100) // 8902300
-splitMultiply(8902,100) // 890200
-splitMultiply(890,100) // 89000
-splitMultiply(100,100) //10000
-splitMultiply(100,100) //10000
-
-fastMultiply(89023,10) // 890230
-fastMultiply(89023,100) // 8902300
-fastMultiply(8902,100) // 890200
-fastMultiply(890,100) // 89000
-fastMultiply(100,100) //10000
-fastMultiply(89023,10) // 890230
-
-//Casos de prueba hecho por la ai
-
-PeasantAlgorithm(100,100)
-PeasantAlgorithm(9999, 9999) //99980001
-PeasantAlgorithm(7, 8) // 56
-
-PeasantAlgorithmIt(100,100)
-PeasantAlgorithmIt(9999, 9999) //99980001
-PeasantAlgorithmIt(7, 8) // 56
-
-
-splitMultiply(100, 100) // 10000
-splitMultiply(9999, 9999) //99980001
-splitMultiply(7, 8) // 56
-
-splitMultiply2(89023, 10) //890230
-splitMultiply2(123, 4567) // 561741
-splitMultiply2(0, 999) // 0
-
-fastMultiply(89023, 10) // 890230
-fastMultiply(12345, 6789) // 83810205
-fastMultiply(99, 1)// 99
+derivadaSuma(cte,cuadrado)(4)
+derivadaSuma(cubo,cuadrado)(10)
+derivadaSuma(cubo,quinta)(8)
+derivadaSuma(quinta,cte)(10)
+derivadaSuma(deEquis,cuadrado)(80)
