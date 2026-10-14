@@ -3,7 +3,7 @@ import main.Derivacion.*
 val deEquis = (x :Double) => x
 val cuadrado = (x :Double) => x*x
 val cubo = (x :Double) => x*x*x
-val cte = (x :Double) => x*x*x*x
+val cte = (x :Double) => 1.5
 val quinta = (x :Double) => x*x*x*x*x
 
 derivada(deEquis)(2)
