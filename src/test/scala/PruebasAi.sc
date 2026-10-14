@@ -1,39 +1,34 @@
-import main.MultiplicacionAi.*
+import main.Derivacion.*
+
+val deEquis = (x :Double) => x
+val cuadrado = (x :Double) => x*x
+val cubo = (x :Double) => x*x*x
+val cte = (x :Double) => 1.5
+val quinta = (x :Double) => x*x*x*x*x
+
+derivada(x => x*x)(3)
+derivada(x => 7.0)(10)
+derivada(x => x*x*x)(-2)
 
 
-PeasantAlgorithm(89023,10) // 890230
-PeasantAlgorithm(89023,100) // 8902300
-PeasantAlgorithm(8902,100) // 890200
-PeasantAlgorithm(890,100) // 89000
-PeasantAlgorithm(100,100) //10000
+derivadaSuma(cubo, cuadrado)(2)
+derivadaSuma(cte, deEquis)(5)
+derivadaSuma(cuadrado, cte)(-3)
+derivadaSuma(cubo, deEquis)(0)
 
 
-PeasantAlgorithmIt(89023,10) // 890230
-PeasantAlgorithmIt(89023,100) // 8902300
-PeasantAlgorithmIt(8902,100) // 890200
-PeasantAlgorithmIt(890,100) // 89000
-PeasantAlgorithmIt(100,100) //10000
-
-splitMultiply(100,100) //10000
-
-fastMultiply(89023,10) // 890230
+derivadaResta(cubo, cuadrado)(2)
+derivadaResta(cuadrado, cubo)(2)
+derivadaResta(deEquis, cte)(7)
+derivadaResta(cuadrado, deEquis)(-1)
 
 
-//Casos de prueba hecho por la ai
+derivadaMult(deEquis, cuadrado)(3)
+derivadaMult(cte, cubo)(2)
+derivadaMult(cuadrado, cuadrado)(-2)
+derivadaMult(cuadrado, cubo)(1)
 
-PeasantAlgorithm(100,100)
-PeasantAlgorithm(9999, 9999) //99980001
-PeasantAlgorithm(7, 8) // 56
-
-PeasantAlgorithmIt(100,100)
-PeasantAlgorithmIt(9999, 9999) //99980001
-PeasantAlgorithmIt(7, 8) // 56
-
-
-splitMultiply(100, 100) // 10000
-splitMultiply(9999, 9999) //99980001
-splitMultiply(7, 8) // 56
-
-fastMultiply(89023, 10) // 890230
-fastMultiply(12345, 6789) // 83810205
-fastMultiply(99, 1)// 99
+derivadaDiv(cuadrado, deEquis)(4)
+derivadaDiv(cuadrado, cte)(3)
+derivadaDiv(deEquis, cte)(-5)
+derivadaDiv(cte, deEquis)(2)
