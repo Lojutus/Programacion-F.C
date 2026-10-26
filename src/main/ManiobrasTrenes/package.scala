@@ -1,6 +1,28 @@
 package main
 
+import scala.annotation.tailrec
+
 package object ManiobrasTrenes {
+  //t1 es inicial , t2 es el final
+  @tailrec
+  def buscarVagon(vagonBuscar:Vagon, trenFuente:Tren, iteracion:Int): Int = {
+    trenFuente match {
+      case Nil => -1
+      case x :: xs if x==vagonBuscar => iteracion
+      case x :: xs =>  buscarVagon(vagonBuscar, xs, iteracion+1)
+
+    }
+  }
+  def trenOrganizadoEnteros(t1:Tren , t2:Tren ): Tren = {
+    t1 match{
+      case Nil => Nil
+      case vagon :: xs => buscarVagon(vagon , t2 , 0)+:trenOrganizadoEnteros(xs , t2 )
+    }
+
+
+  }
+
+
   type Vagon = Any
   type Tren = List[Vagon]
   type Estado = (Tren, Tren , Tren)
