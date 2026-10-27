@@ -40,6 +40,7 @@ package object ManiobrasTrenes {
     null
   }
   def definirManiobra(t1:Tren , t2:Tren): Maniobra = {
+    val trenNumericoReferencias:Tren = trenOrganizadoEnteros(t1 , t2)
     null
   }
 
