@@ -22,6 +22,48 @@ package object ManiobrasTrenes {
 
   }
 
+  def organizarTren(estado:Estado): Maniobra = {
+    /*
+        Casos para tener en cuenta:
+        0: Principal y Uno estan vacios; se coloca Dos en principal y se devuelve ese movimento, Finaliar (Hecho)
+        1: El numero que sigue esta en la cola; en ese caso se corta y se manda a Dos  , los que esten en Uno vuelven a principal, ReCall (Hecho)
+        2: no esta en la cabeza, se corta y se mandan a Uno , ReCall (Hecho)
+        En dos se arma el tren
+        NOTA IMPORTANTE, POR AHORA LOS MOVIMIENTOS SE LEEN DE DERECHA A IZQUIERDA ( como los arabes )
+    */
+    estado match {
+      case (x,y,z) =>
+        val nextNum:Any= z.head
+        x match {
+          case Nil =>
+            y match {
+              case Nil =>   List(Dos(-z.length))
+            }
+          case cola if cola.last == nextNum =>
+
+            // definicion de los movimentos necesarios
+              val movimiento1 = Dos(1)
+              val movimiento3 = Uno(-y.length)
+          // Encapsulamiento de los movimientos en una maniobra
+              val maniobra:Maniobra =  List(movimiento3, movimiento1)
+          // Aplicar movimientos para obtener el nuevo estado
+              val estadoFinal:Estado = aplicarMovimiento( aplicarMovimiento(estado , movimiento1) , movimiento3)
+          //Concatenacion de la nueva maniobra y nueva llamada para que ordene lo demas
+              maniobra ++ organizarTren(estadoFinal)
+          case cola =>
+            val movimiento1 = Uno(1)
+            // Encapsulamiento de los movimientos en una maniobra
+            val maniobra: Maniobra = List(movimiento1)
+            // Aplicar movimientos para obtener el nuevo estado
+            val estadoFinal:Estado = aplicarMovimiento(estado , movimiento1)
+            //Concatenacion de la nueva maniobra y nueva llamada para que ordene lo demas
+            maniobra ++ organizarTren(estadoFinal)
+
+
+        }
+
+    }
+  }
 
   type Vagon = Any
   type Tren = List[Vagon]
@@ -30,6 +72,7 @@ package object ManiobrasTrenes {
   case class Uno(n:Int) extends Movimiento
   case class Dos(n:Int) extends Movimiento
   type Maniobra = List[Movimiento]
+
    def aplicarMovimiento(e: Estado, m: Movimiento): Estado = {
     val (principal, uno, dos) = e
     m match {
@@ -61,8 +104,9 @@ package object ManiobrasTrenes {
     null
   }
   def definirManiobra(t1:Tren , t2:Tren): Maniobra = {
-    val trenNumericoReferencias:Tren = trenOrganizadoEnteros(t1 , t2)
-    null
+    val trenNumericoReferencias:Tren = trenOrganizadoEnteros(t1 , t2) // esto develve un tren organizado por referencias, permitiendo organizarlo
+    val trenVacio:Tren = Nil;
+    organizarTren(trenNumericoReferencias,trenVacio, trenVacio)
   }
 
 }
