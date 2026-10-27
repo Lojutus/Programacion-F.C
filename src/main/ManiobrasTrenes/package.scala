@@ -22,7 +22,7 @@ package object ManiobrasTrenes {
 
   }
 
-  def organizarTren(estado:Estado): Maniobra = {
+  def organizarTren(estado:Estado, next:Int): Maniobra = {
     /*
         Casos para tener en cuenta:
         0: Principal y Uno estan vacios; se coloca Dos en principal y se devuelve ese movimento, Finaliar (Hecho)
@@ -32,32 +32,38 @@ package object ManiobrasTrenes {
         NOTA IMPORTANTE, POR AHORA LOS MOVIMIENTOS SE LEEN DE DERECHA A IZQUIERDA ( como los arabes )
     */
     estado match {
-      case (x,y,z) =>
-        val nextNum:Any= z.head
-        x match {
+      case (principal,uno,dos) =>
+        principal match { // Caso 0
           case Nil =>
-            y match {
-              case Nil =>   List(Dos(-z.length))
+            uno match {
+              case Nil =>   List(Dos(-dos.length))
+              case y1 =>
+                val movimiento1 = Uno(1)
+                // Encapsulamiento de los movimientos en una maniobra
+                val maniobra: Maniobra = List(movimiento1)
+                // Aplicar movimientos para obtener el nuevo estado
+                val estadoFinal:Estado = aplicarMovimiento(estado , movimiento1)
+                //Concatenacion de la nueva maniobra y nueva llamada para que ordene lo demas
+                maniobra ++ organizarTren(estadoFinal, next)
             }
-          case cola if cola.last == nextNum =>
-
+          case cola if cola.last == next => // Caso 1
             // definicion de los movimentos necesarios
               val movimiento1 = Dos(1)
-              val movimiento3 = Uno(-y.length)
+              val movimiento3 = Uno(-uno.length)
           // Encapsulamiento de los movimientos en una maniobra
-              val maniobra:Maniobra =  List(movimiento3, movimiento1)
+              val maniobra:Maniobra =  List(movimiento1, movimiento3)
           // Aplicar movimientos para obtener el nuevo estado
               val estadoFinal:Estado = aplicarMovimiento( aplicarMovimiento(estado , movimiento1) , movimiento3)
           //Concatenacion de la nueva maniobra y nueva llamada para que ordene lo demas
-              maniobra ++ organizarTren(estadoFinal)
-          case cola =>
+              maniobra ++ organizarTren(estadoFinal, next -1)
+          case cola => // Caso 2
             val movimiento1 = Uno(1)
             // Encapsulamiento de los movimientos en una maniobra
             val maniobra: Maniobra = List(movimiento1)
             // Aplicar movimientos para obtener el nuevo estado
             val estadoFinal:Estado = aplicarMovimiento(estado , movimiento1)
             //Concatenacion de la nueva maniobra y nueva llamada para que ordene lo demas
-            maniobra ++ organizarTren(estadoFinal)
+            maniobra ++ organizarTren(estadoFinal , next)
 
 
         }
@@ -106,7 +112,7 @@ package object ManiobrasTrenes {
   def definirManiobra(t1:Tren , t2:Tren): Maniobra = {
     val trenNumericoReferencias:Tren = trenOrganizadoEnteros(t1 , t2) // esto develve un tren organizado por referencias, permitiendo organizarlo
     val trenVacio:Tren = Nil;
-    organizarTren(trenNumericoReferencias,trenVacio, trenVacio)
+    organizarTren((trenNumericoReferencias,trenVacio, trenVacio), trenNumericoReferencias.length)
   }
 
 }
