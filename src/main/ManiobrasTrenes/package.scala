@@ -30,11 +30,32 @@ package object ManiobrasTrenes {
   case class Uno(n:Int) extends Movimiento
   case class Dos(n:Int) extends Movimiento
   type Maniobra = List[Movimiento]
-  def aplicarMovimiento(e:Estado , m:Movimiento ): Estado = {
-    val  prueba:Vagon = 0
-    val  init:Tren = List(prueba)
-    (init , init , init)
+   def aplicarMovimiento(e: Estado, m: Movimiento): Estado = {
+    val (principal, uno, dos) = e
+    m match {
 
+      case Uno(n) if n > 0 =>
+        val corte          = (principal.length - n) max 0
+        val (quedan, van)  = principal.splitAt(corte)
+        (quedan, van ++ uno, dos)
+
+      case Uno(n) if n < 0 =>
+        val cantidad       = (-n) min uno.length
+        val (van, quedan)  = uno.splitAt(cantidad)
+        (principal ++ van, quedan, dos)
+
+      case Dos(n) if n > 0 =>
+        val corte          = (principal.length - n) max 0
+        val (quedan, van)  = principal.splitAt(corte)
+        (quedan, uno, van ++ dos)
+
+      case Dos(n) if n < 0 =>
+        val cantidad       = (-n) min dos.length
+        val (van, quedan)  = dos.splitAt(cantidad)
+        (principal ++ van, uno, quedan)
+
+      case _ => e
+    }
   }
   def aplicarMovimientos(e:Estado , movs:Maniobra): List[Estado] = {
     null
