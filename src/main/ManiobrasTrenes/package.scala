@@ -109,7 +109,8 @@ package object ManiobrasTrenes {
   def aplicarMovimientos(e:Estado , movs:Maniobra): List[Estado] = {
    movs match{
      case Nil => Nil
-     case x :: xs => aplicarMovimientos(aplicarMovimiento(e, x), xs)
+     case x :: xs => val nuevoEstado = aplicarMovimiento(e, x)
+       nuevoEstado +: aplicarMovimientos(nuevoEstado, xs)
    }
   }
   def definirManiobra(t1:Tren , t2:Tren): Maniobra = {

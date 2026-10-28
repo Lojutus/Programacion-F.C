@@ -1,4 +1,40 @@
 import main.ManiobrasTrenes.*
+//Pruebas propias
+val e1 = (List("enero", "febrero", "marzo", "abril"), Nil, Nil)
+
+val e2 = aplicarMovimiento(e1, Uno(2))
+val e3 = aplicarMovimiento(e2, Dos(2))
+val e4 = aplicarMovimiento(e3, Uno(-2))
+val e5 = aplicarMovimiento(e4, Dos(-2))
+val trenMeta = e1.head
+val trenInicial = e5.head
+
+val trenfinal = aplicarMovimientos((trenInicial, Nil ,Nil), definirManiobra(trenInicial , trenMeta)) //Deberia de devolver el tren e1 al final
+
+val r1 = (List(true, false), Nil, Nil)
+
+val r2 = aplicarMovimiento(r1, Uno(2))
+val r3 = aplicarMovimiento(r2, Dos(2))
+val r4 = aplicarMovimiento(r3, Uno(-2))
+val r5 = aplicarMovimiento(r4, Dos(-2))
+val rtrenMeta = r1.head
+val rtrenInicial = r5.head
+
+
+val rtrenfinal = aplicarMovimientos((rtrenInicial, Nil ,Nil), definirManiobra(rtrenInicial , rtrenMeta)) //Deberia de devolver el tren r1 al final
+
+
+val s1 = (List('a', 'b' , 'c' , '2', 'e' , '1' , 1 , true), Nil, Nil)
+
+val s2 = aplicarMovimiento(s1, Uno(2))
+val s3 = aplicarMovimiento(s2, Dos(2))
+val s4 = aplicarMovimiento(s3, Uno(-29))
+val s5 = aplicarMovimiento(s4, Dos(-10))
+val strenMeta = s1.head
+val strenInicial = s5.head
+
+val strenfinal = aplicarMovimientos((strenInicial, Nil ,Nil), definirManiobra(strenInicial , strenMeta)) //Deberia de devolver el tren s1 al final
+
 
 //PRUEBAS AI
 def mostrarEstado(estado: Estado): Unit = {
@@ -156,7 +192,7 @@ def probarTrenOrganizado(
   println(s"Tren 1: $t1")
   println(s"Tren 2: $t2")
 
-  println("Referencia de cada vagón de t1 dentro de t2:")
+  println("Referencia de cada vagón de t1 dentro de t2 :")
 
   t1.zipWithIndex.foreach {
     case (vagon, indice) =>
