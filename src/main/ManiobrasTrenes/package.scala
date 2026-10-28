@@ -16,7 +16,7 @@ package object ManiobrasTrenes {
   def trenOrganizadoEnteros(t1:Tren , t2:Tren ): Tren = {
     t1 match{
       case Nil => Nil
-      case vagon :: xs => buscarVagon(vagon , t2 , 0)+:trenOrganizadoEnteros(xs , t2 )
+      case vagon :: xs => buscarVagon(vagon , t2 , 1)+:trenOrganizadoEnteros(xs , t2 )
     }
 
 
@@ -107,7 +107,10 @@ package object ManiobrasTrenes {
     }
   }
   def aplicarMovimientos(e:Estado , movs:Maniobra): List[Estado] = {
-    null
+   movs match{
+     case Nil => Nil
+     case x :: xs => aplicarMovimientos(aplicarMovimiento(e, x), xs)
+   }
   }
   def definirManiobra(t1:Tren , t2:Tren): Maniobra = {
     val trenNumericoReferencias:Tren = trenOrganizadoEnteros(t1 , t2) // esto develve un tren organizado por referencias, permitiendo organizarlo
