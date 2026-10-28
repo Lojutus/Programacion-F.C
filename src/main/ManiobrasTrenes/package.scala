@@ -29,7 +29,7 @@ package object ManiobrasTrenes {
         1: El numero que sigue esta en la cola; en ese caso se corta y se manda a Dos  , los que esten en Uno vuelven a principal, ReCall (Hecho)
         2: no esta en la cabeza, se corta y se mandan a Uno , ReCall (Hecho)
         En dos se arma el tren
-        NOTA IMPORTANTE, POR AHORA LOS MOVIMIENTOS SE LEEN DE DERECHA A IZQUIERDA ( como los arabes )
+
     */
     estado match {
       case (principal,uno,dos) =>
