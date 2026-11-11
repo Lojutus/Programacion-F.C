@@ -21,7 +21,7 @@ def prueba(nombre: String)(cond: => Boolean): Unit = {
   if (ok) pasadas += 1
   println(s"${if (ok) "[OK]  " else "[FALLO]"} $nombre")
 }
-
+// COMENTARIO IMPORTANTE, VOY A REUTILIZAR LAS FUNCIONES QUE HIZO LA AI PARA HACER LAS PRUEBAS,
 // ------------------------------------------------------------
 seccion("lOcPal / lOcFrase")
 // ------------------------------------------------------------
