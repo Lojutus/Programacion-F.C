@@ -41,6 +41,28 @@ package object Anagramas {
 
       }
   }
-  //def complemento(lOc: Occurrencias, slOc: Occurrencias): Occurrencias = {}
-  //def anagramasDeFrase(frase: Frase): List[Frase] = {}
+  def complemento(lOc: Occurrencias, slOc: Occurrencias): Occurrencias = {
+    slOc match {
+      case Nil => lOc
+      case (c, n) :: resto =>
+        val nuevo: Occurrencias = lOc.map { case (letra, cant) => if (letra == c) (letra, cant - n) else (letra, cant) }
+          .filter { case (_, k) => k > 0 }
+        complemento(nuevo, resto)
+    }
+  }
+
+  def anagramasDeFrase(frase: Frase): List[Frase] = {
+
+    def aux(oc: Occurrencias): List[Frase] = {
+      if (oc.isEmpty)  List(Nil) // caso base
+      else
+        for {
+          comb <- combinaciones(oc) if (comb != Nil) // parte 1
+          palabra <- diccionarioPorOcurrencias.getOrElse(comb, Nil) // palabras de esa parte 1
+          resto <- aux(complemento(oc,comb)) if !resto.contains(palabra)  // parte 2, partida otra vez
+        } yield (palabra::resto) // frase armada
+    }
+
+    aux(lOcFrase(frase))
+  }
 }
